@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .padding {
+            padding: 10px;
+        }
+
+        #popup {
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: fixed;
+            background-color: rgba(0, 0, 0, .5);
+
+            opacity: 0;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: opacity 0.5s ease-out;
+        }
+            #popup.shown {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            #popup .popup-content {
+                background-color: white;
+                padding: 20px 50px 20px 50px;
+            }
+
+            #popup .scrollable {
+                height: 80px;
+                overflow-y:auto;
+                background-color: #eee;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        .no-scroll {
+            position: fixed;
+            width: 100%;
+        }
+
+    </style>
+    <script>
+        var enableBodyScrollLock = false;
+
+        function toggleLock() {
+            enableBodyScrollLock = !enableBodyScrollLock;
+            var tag = document.querySelector('#action');
+            tag.innerHTML = enableBodyScrollLock ? 'Enabled' : 'Disabled';
+        }
+        function showPopup() {
+            if (enableBodyScrollLock) lockBodyScroll(true);
+            document.querySelector('#popup').classList.add('shown');
+        }
+        function hidePopup() {
+            if (enableBodyScrollLock) lockBodyScroll(false);
+            document.querySelector('#popup').classList.remove('shown');
+        }
+
+        function lockBodyScroll(lock) {
+            var tag = document.querySelector('.container'); // the child element of body that contains the long content
+            if (!tag) return;
+
+            if (lock) {
+                var scrollTop = document.scrollingElement.scrollTop;
+                tag.classList.add('no-scroll');
+                tag.style.top = '-' + scrollTop + 'px';
+            } else {
+                var top = tag.offsetTop;
+                tag.classList.remove('no-scroll');
+                tag.style.top = '0px';
+                document.scrollingElement.scrollTop = - top;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Prevent body scrolling: <button id="action" onclick="toggleLock()">Disabled</button></h2>
+        <section onclick="showPopup()">
+            <h3>Click/tap anywhere for a popup</h3>
+            <div class="padding">Multi line 1</div>
+            <div class="padding">Multi line 2</div>
+            <div class="padding">Multi line 3</div>
+            <div class="padding">Multi line 4</div>
+            <div class="padding">Multi line 5</div>
+            <div class="padding">Multi line 6</div>
+            <div class="padding">Multi line 7</div>
+            <div class="padding">Multi line 8</div>
+            <div class="padding">Multi line 9</div>
+            <div class="padding">Multi line 10</div>
+            <div class="padding">Multi line 11</div>
+            <div class="padding">Multi line 12</div>
+            <div class="padding">Multi line 13</div>
+            <div class="padding">Multi line 14</div>
+            <div class="padding">Multi line 15</div>
+            <div class="padding">Multi line 16</div>
+            <div class="padding">Multi line 17</div>
+            <div class="padding">Multi line 18</div>
+            <div class="padding">Multi line 19</div>
+            <div class="padding">Multi line 20</div>
+            <div class="padding">Multi line 21</div>
+            <div class="padding">Multi line 22</div>
+            <div class="padding">Multi line 23</div>
+            <div class="padding">Multi line 24</div>
+            <div class="padding">Multi line 25</div>
+            <div class="padding">Multi line 26</div>
+            <div class="padding">Multi line 27</div>
+            <div class="padding">Multi line 28</div>
+            <div class="padding">Multi line 29</div>
+            <div class="padding">Multi line 30</div>
+            <div class="padding">Multi line 31</div>
+            <div class="padding">Multi line 32</div>
+            <div class="padding">Multi line 33</div>
+            <div class="padding">Multi line 34</div>
+            <div class="padding">Multi line 35</div>
+            <div class="padding">Multi line 36</div>
+            <div class="padding">Multi line 37</div>
+            <div class="padding">Multi line 38</div>
+            <div class="padding">Multi line 39</div>
+            <div class="padding">Multi line 40</div>
+        </section>
+    </div>
+    <div id="popup">
+        <div class="popup-content">
+            <strong>This is a modal popup!</strong>
+            <div class="scrollable">
+                <div>popup line 1</div>
+                <div>popup line 2</div>
+                <div>popup line 3</div>
+                <div>popup line 4</div>
+                <div>popup line 5</div>
+                <div>popup line 6</div>
+                <div>popup line 7</div>
+                <div>popup line 8</div>
+                <div>popup line 9</div>
+                <div>popup line 10</div>
+            </div>
+            <div><button onclick="hidePopup()">Close</button></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -70,7 +70,14 @@
         function lockBodyScroll(lock) {
             var tag = document.querySelector('.container'); // the child element of body that contains the long content
             if (!tag) return;
-
+            if (!document.scrollingElement) {
+                alert('Please use newer browser!', document.body.scrollTop);
+                return;
+            }
+            if (!tag.classList) {
+                alert('Use newer browser!');
+                return;
+            }
             if (lock) {
                 var scrollTop = document.scrollingElement.scrollTop;
                 tag.classList.add('no-scroll');

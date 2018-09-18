@@ -71,10 +71,6 @@
             var tag = document.querySelector('.container'); // the child element of body that contains the long content
             if (!tag) return;
             var elem = document.scrollingElement || document.body;
-            if (!tag.classList) {
-                alert('Use newer browser!');
-                return;
-            }
             if (lock) {
                 var scrollTop = elem.scrollTop;
                 tag.classList.add('no-scroll');
@@ -89,9 +85,9 @@
     </script>
 </head>
 <body>
-    <div class="container">
+    <section class="container">
         <h2>Prevent body scrolling: <button id="action" onclick="toggleLock()">Disabled</button></h2>
-        <section onclick="showPopup()">
+        <div onclick="showPopup()">
             <h3>Click/tap anywhere for a popup</h3>
             <div class="padding">Multi line 1</div>
             <div class="padding">Multi line 2</div>
@@ -133,8 +129,8 @@
             <div class="padding">Multi line 38</div>
             <div class="padding">Multi line 39</div>
             <div class="padding">Multi line 40</div>
-        </section>
-    </div>
+        </div>
+    </section>
     <div id="popup">
         <div class="popup-content">
             <strong>This is a modal popup!</strong>
